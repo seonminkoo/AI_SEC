@@ -52,5 +52,5 @@ client_socket     = accept( server_socket, (struct sockaddr*)&client_addr, &clie
 
 #### 매크로
 윈도우만 WSAStartup 해줌!! -> 드라이버를 올림<br>
-ff
+매크로 코드에서 ** connect(s,sa, Len(sa)) 나오면 서버의 accept로  
 
