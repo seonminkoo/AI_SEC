@@ -14,7 +14,8 @@
 
 
 
-## test123.c //server.c
+### 서버
+#### test123.c //server.c
 ```
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,4 +49,8 @@ client_socket     = accept( server_socket, (struct sockaddr*)&client_addr, &clie
  close(server_socket);
 }
 ```
+
+#### 매크로
+윈도우만 WSAStartup 해줌!! -> 드라이버를 올림
+ff
 
