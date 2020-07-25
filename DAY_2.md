@@ -13,7 +13,8 @@
 ![day2_2](https://user-images.githubusercontent.com/50771111/88466051-756ab380-cf03-11ea-972a-a8c19b88ad2f.jpg)
 
 test123.c //server.c
-'''
+
+```
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -45,4 +46,4 @@ client_socket     = accept( server_socket, (struct sockaddr*)&client_addr, &clie
  close( client_socket);
  close(server_socket);
 }
-'''
+```
