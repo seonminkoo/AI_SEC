@@ -1,10 +1,5 @@
-## metasploit
-### command
-```
-service postgresql start
-service metasploit start
-msfconsole
-```
+
+
 
 ## Driven by download: 자동으로
 1) 구축
