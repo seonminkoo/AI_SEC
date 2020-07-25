@@ -70,13 +70,21 @@ DLL은 혼자 프로그램 돌아갈 수 X
 > rundll32.exe DLL파일 경로, main // rundll32.exe 라는 보안 프로그램이 있음, 강제적으로 부모 만들어주는 것!
 => **DLL Injection은 코드(메세지 박스)를 다른 프로그램에 삽입해서 실행될 수 있게 하는 것?!
 
+### DLL Injection
 DLL을 쓰는 프로그램 만들고 싶음
 > LoadLibrary("testdll.dll"); //정상 프로그램에서 dll 쓸 수 있음
 testdll.dll이 11자리이기 때문에 실행시키고 싶은 다른 프로그램에 11자리만큼 자리 만들어놔야함
-> virtualAlloc(공간 할당할 프로그램의 pid, 자리수), ex. virtualAlloc(10, 11) //남의 프로그램에 11byte의 공간 할당됨 => ** x <br>
-> writeMemory(x, "내용"); //
+> virtualAlloc(공간 할당할 프로그램의 pid, 자리수), ex. virtualAlloc(10, 11) //남의 프로그램에 11byte의 공간 할당됨 **=> x** <br>
+> writeMemory(x, "내용(ex.aaa)"); //남의 메모리에 aaa 써짐 **=> y**
+> GetProcAddress("&L-); //주소얻음 **=> z**
+>CreateREmoteThread(z, y);
 
+**snapshot**
 
+#### cmd
+>tasklist //프로그램의 pid 리스트
+>tasklist | findstr 11772(pid) 
 
-
-
+#### strings 프로그램
+**cmd**
+> strings injector.exe >a.txt //실행파일에 있는 문자열들이 a.txt에 들어가게 됨
