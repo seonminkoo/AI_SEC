@@ -1,3 +1,10 @@
 # DAY 2
 
-![day2_1](https://user-images.githubusercontent.com/50771111/88466005-e78ec880-cf02-11ea-9670-8c7cbfb42f0f.jpg)
+* 공격자 공격 방법
+  - EXE 파일
+    1. 악성코드 생성도구(metasploit): 서버 백신 //서버백식은 악성코드 못잡은 경우 O
+    2. DLL Injection
+  - URL
+  - MACRO
+  - 웹 취약점
+  - 모바일
