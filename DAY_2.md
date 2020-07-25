@@ -73,7 +73,7 @@ DLL은 혼자 프로그램 돌아갈 수 X
 DLL을 쓰는 프로그램 만들고 싶음
 > LoadLibrary("testdll.dll"); //정상 프로그램에서 dll 쓸 수 있음
 testdll.dll이 11자리이기 때문에 실행시키고 싶은 다른 프로그램에 11자리만큼 자리 만들어놔야함
-> virtualAlloc(공간 할당할 프로그램의 pid, 자리수), ex. virtualAlloc(10, 11) //남의 프로그램에 11byte의 공간 할당됨 => **x <br>
+> virtualAlloc(공간 할당할 프로그램의 pid, 자리수), ex. virtualAlloc(10, 11) //남의 프로그램에 11byte의 공간 할당됨 => ** x <br>
 > writeMemory(x, "내용"); //
 
 
