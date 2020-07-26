@@ -103,11 +103,11 @@ Process Monitior의 행위의 결과값 분석하는 법
 - 데이터분석
 
 * 메모리, 시그니처 분석
-ex. process Explorer와 메모장
-process Explore에서 메모장 우클릭->properties
-  - 통신 안하니깐 TCP 부분 비어 있음
-  - Thread 부분 켜놓고, 메모징 저장 누르면 이 과정 Thread 부분에 동적으로 추가됨 
-      -> 윈도우는 동적으로 동작하기 때문에 내가 실행할 때 dll 임의로 추가할 수 있음 => DLL Injection
+ex. process Explorer와 메모장   
+process Explore에서 메모장 우클릭->properties   
+  - 통신 안하니깐 TCP 부분 비어 있음   
+  - Thread 부분 켜놓고, 메모징 저장 누르면 이 과정 Thread 부분에 동적으로 추가됨    
+      -> 윈도우는 동적으로 동작하기 때문에 내가 실행할 때 dll 임의로 추가할 수 있음 => DLL Injection   
   
 #### 악성코드 메일 공격 방식
 > 메일 자동 전송 1:다 공격 가능
@@ -115,16 +115,16 @@ process Explore에서 메모장 우클릭->properties
 > 파이썬 코드로 메일 전송 가능(mime)
 
 #### 워드 매크로(CDR?)
-passwordchecker procexp에서 full dump 후 strings로 분석
-strings PasswordChecker.dmp > a.txt
-비밀번호, 메세지 등 문자열로 저장되어 있음
-활용 ex
+passwordchecker procexp에서 full dump 후 strings로 분석   
+strings PasswordChecker.dmp > a.txt    
+비밀번호, 메세지 등 문자열로 저장되어 있음    
+활용 ex    
 > c소켓 프로그래밍 <- 서버
 > 워드 매크로 <- 클라이언트
 > 악성 메일 보내서 클릭 여부 확인 가능
 
-주체: 행위, 메모리, 실행파일
-환경: 얘도 알아야
+주체: 행위, 메모리, 실행파일    
+환경: 얘도 알아야    
 
 
 
