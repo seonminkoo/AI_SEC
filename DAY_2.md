@@ -31,8 +31,8 @@ show options
 set lhost 10.10.10.10
 exploit //공격,      +encoders: 특정 기호로 변경
 shellcode
-bind (->)
-reverse (<-)
+bind (->, inbound)
+reverse (<-, outbound)
 ```
 
 #### senario
@@ -64,11 +64,51 @@ file system/media/sf_폴더명
 > mytext.exe 옮기니 알약이 감지함
 > 백신 끄고 실행하니 쉘 따짐
 
-#### 해야 할 것
-- 행위분석 수집 프로그램 개발
-- 전처리 프로그램 개발
+
+### AI보안2일(5)
+```
+process Explorer, Process Monitior, Strings 설치 필요
+```
+process Explorer에서 
+> mytest.exe를 실행하면(셀을 실행하면) cmd.exe -> conhost.exe 순서로 실행됨(이 두 개의 패턴이 반드시 나온다)
+
+Process Monitior에서 Operation부분 보면
+> Process Start: 프로세스 시작
+> RegRegister, RegQuery: 레지스트리에서 환경 설정하는 값을 읽거나 썼다.
+> TCP Conect: 통신 프로그램에서 클라이언트가 쓰는 명령어! -> 따라서 클라이언트임을 알 수 있음
+Process Monitior에서 Detail-Event부분 보면
+> path: 발신자의ip:6125-> 수신자의ip:7070 //1) 왼쪽에서 7070포트로 들어갔다, 2) 발신자와 수신자의 ip 모두 확인 가능
+Detail-Process부분의 Modules 보면
+> mswsock.dll, wsock32.dll : 통신 관련된 기능, 소켓!
+Detail-Stack 보면 메모리 주소나 어떤 dll 썼는가 같은 정보 볼 수 있음
+**Process Monitior에서 TCP copy, TCP receive 같은게 있는데 더블 클릭해서 Event Properties-> Stack에서 뭘 했는지 알아야 함!!
+**
+이제 이것을 보고 분석하면 행위가 됨!(행위 분석)
+아까 백신이 잡은 것은 signiture -> 단순 문자열에 대한 분석이 었음
+
+Process Monitior의 행위의 결과값 분석하는 법
+> csv 파일로 저장
+> csv 파일은 ,로 구분되는데 detail 내용 안에 ,가 들어있기 때문에 , 제거해야함 -> 1. 고정되지 않은 수의 ',' 제거하는 프로그램 개발 필요
+> 2. 로그의 양이 많기 때문에 DB에 적재해야함!
+> RegOPenKey, RegQueryValue, RegCloseKey -> 3개가 세트! : 목적) 레지스트리를 읽는다
+>   이것을 변환 처리 해야하는데 위와 같이 둘 건지 RegRead 하나 두고 레지스트리를 읽었습니다 -> RegRead 1로 표현할 건지 결정해야함
+
+> CreateFile 부분에서 dll 파일 생성한다는 부분 있는데 dll은 이미 있기 때문에 말이 안됨
+> Detail 부분 보면 Read Attribute, Open -> 결론적으로 dll을 읽었다!는 뜻 => Create File이 아니라 Read File로 이름 바꾸는게 정확
+> => EDR, APT 솔루션 이미 있음
+
+#### 결론(해야 할 것)
+- 행위분석 수집 로그 프로그램 개발 //프로세스 모니터 자체를 개발 해야함
+- 전처리 프로그램 개발(A ->1, NULL, 이상치) 
 - 데이터분석
 
+* 메모리, 시그니처 분석
+ex. process Explorer와 메모장
+process Explore에서 메모장 우클릭->properties
+  - 통신 안하니깐 TCP 부분 비어 있음
+  - Thread 부분 켜놓고, 메모징 저장 누르면 이 과정 Thread 부분에 동적으로 추가됨 
+      -> 윈도우는 동적으로 동작하기 때문에 내가 실행할 때 dll 임의로 추가할 수 있음 => DLL Injection
+  
 #### 악성코드 메일 공격 방식
 > 메일 자동 전송 1:다 공격 가능
 > 수신확인 - 스크립트(html)
@@ -82,7 +122,6 @@ strings PasswordChecker.dmp > a.txt
 > c소켓 프로그래밍 <- 서버
 > 워드 매크로 <- 클라이언트
 > 악성 메일 보내서 클릭 여부 확인 가능
-
 
 주체: 행위, 메모리, 실행파일
 환경: 얘도 알아야
