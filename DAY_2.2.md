@@ -22,6 +22,7 @@ DLL은 혼자 프로그램 돌아갈 수 X
 => **DLL Injection은 코드(메세지 박스)를 다른 프로그램에 삽입해서 실행될 수 있게 하는 것?!
 
 ### DLL Injection
+![day2_injection](https://user-images.githubusercontent.com/50771111/88477111-5e19dd80-cf78-11ea-9fa0-ab9365fa13fe.png)
 DLL을 쓰는 프로그램 만들고 싶음
 > LoadLibrary("testdll.dll"); //정상 프로그램에서 dll 쓸 수 있음
 testdll.dll이 11자리이기 때문에 실행시키고 싶은 다른 프로그램에 11자리만큼 자리 만들어놔야함
