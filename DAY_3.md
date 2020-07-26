@@ -43,18 +43,37 @@ Run SQL Command Line <- oracle XE
 > train
 > test
 
-usbDeview
+usbDeview(윈도우 레지스트리 내용 출력해놓은 것! 실시간X, 정확하지 않음) => USBDeview 텍스트 정보로 가져와야 함
 ```
 usbdeview /stext a.txt
 ```
-usb 사용 기록 조회  
-웹사이트 파일전송, 운영체제 파일 생성 기록과 함께 분석 가능  
-BrowsingHistoryView  
-브라우저 기록 조회  
+Devicename, Desc, Serial, 생성, 종료, 컴퓨터이름  
+1) 시리얼 번호로 등록된 USB를 사용하지 않는사람 알 수 있음(건수)   
+2) 직책별로 USB 사용 건수 알 수 있음(나이, 직무별로 USB 얼마나 쓰고 있는지 알 수 있음)  
+3) 현재 상태에서 USB사용 사용내역(시리얼 번호)  
+
+* 웹사이트 파일전송이력, 운영체제에서 파일 생성정보  
+	BrowsingHistoryView와 결합하면 더 강력해짐!  
+	실시간은?  WM_DEVICECHANGE //매체 정보에 대한 실시간은 가능하당!!  
+
+a.txt를 엑셀처럼 정렬되게 변환해야함(수직->수평 변환) => 변환 프로그램 개발해야함(PLSQL)  
+
+> 정리
+> usb 사용 기록 조회  
+> 웹사이트 파일전송, 운영체제 파일 생성 기록과 함께 분석 가능  
+> BrowsingHistoryView  
+> 브라우저 기록 조회  
 
 
 
-
+### 준비
+OracleXE 다운  
+Run SQL 실행  
+	1. connect system/1234 //로그인
+	2. select * from dual
+	   run
+	3. edit //수정
+  
 ### 파이썬 기초
 언어를 공부할 때
 1) 자료형
@@ -62,6 +81,25 @@ BrowsingHistoryView
 3) 파일입출력
 4) 통신
 5) IPC: Queue, Shared memort
+* 생산성: 패키지(ex, PE파일 읽기)
+
+## oracle
+1) 파이썬 입력
+  1-1) 파일시스템 정보를 Oracle DB에 입력
+    - Master File Table: 파일 생성, 읽기, 수정 기록
+    - forecopy_handy -m . , 엑셀(CSV)변환, 
+
+  1-2) 엑셀 데이터를 Oracle DB에 입력
+  1-3) USB 정보를 Oracle DB에 입력
+2) 출력
+  2-1) Oracle DB에서 읽어서 파이썬으로 출력
+  2-2) 데이터 프레임을 출력
+3) 시나리오
+  > 취약점 정보를 구하고 입력, 출력, 조회(차트)
+  > 파일 시스템 암호화 랜섬웨어
+  > MSWord에 있는 파일 중에서 특정 단어가 있는 것을 조회하기
+  > 로그 파일 분석
+  
 ### oracle 실습
 **유저 생성**
 ```
@@ -147,7 +185,7 @@ INSERT INTO emp VALUES('test2', 2000);
 INSERT INTO emp(empno) VALUES(1000);
 SELECT NVL(sal, (SELECT avg(sal) FROM emp)) FROM emp WHERE sal IS NULL;
 ```
-#### DECODE: 얘도 치환
+**DECODE: 얘도 치환**
 ```
 SELECT decode(empno, 'test1', 1) FROM emp;
 ```
@@ -175,12 +213,34 @@ code,
 result,
 description
 )
+```
 ### cmd 커맨드
 ```
 sqlldr userid=aiuser/1234 control=webcheck.ctl log=webcheck.log
 ```
+----
 pandas, sklearn KMeans 알고리즘 활용 예제(matplotlib으로 visualization)
 KMeans: clustering algorithm
 코드 N드라이브에 있음
+
+
+
+#### NULL.값 데이터 전처리 정리 뭐 의미하는지 추가하기
+> select * from emp where sal is not null;
+> select nvl(sal,0) from emp where sak is null;
+> select nvl(sal, (select avg(sal) from emp)) from emp where sal
+> select avg(sal) from emp;
+> select decode(empnom, 'test1', 1) as aaa from emp;  //범주형 데이터 문자로
+
+
+
+
+#### 파이썬 서버 소켓 할 수 있는지!! 
+             127.0.0.1  
+    매크로 -----------> 서버(Listen)  
+                     <컴퓨터이름찍힘> -------> DB에서 조회(select) ----->엑셀로 저장  
+                     
+SikulixIDE로 이미지 크롤링 가능  
+
 
 #### AI보안3일(8)
