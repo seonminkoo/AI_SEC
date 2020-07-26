@@ -226,11 +226,11 @@ KMeans: clustering algorithm
 
 
 #### NULL.값 데이터 전처리 정리 뭐 의미하는지 추가하기
-> select * from emp where sal is not null;
-> select nvl(sal,0) from emp where sak is null;
-> select nvl(sal, (select avg(sal) from emp)) from emp where sal
-> select avg(sal) from emp;
-> select decode(empnom, 'test1', 1) as aaa from emp;  //범주형 데이터 문자로
+> select * from emp where sal is not null;  
+> select nvl(sal,0) from emp where sak is null;  
+> select nvl(sal, (select avg(sal) from emp)) from emp where sal  
+> select avg(sal) from emp;  
+> select decode(empnom, 'test1', 1) as aaa from emp;  //범주형 데이터 문자로  
 
 
 
@@ -242,5 +242,3 @@ KMeans: clustering algorithm
                      
 SikulixIDE로 이미지 크롤링 가능  
 
-
-#### AI보안3일(8)
