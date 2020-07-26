@@ -133,13 +133,13 @@ cur.close()
 con.close()
 ```
 
-***sql로 교집합 조회***
+**sql로 교집합 조회**
 ```
 SELECT * FROM course a, module b, schedule c
 WHERE a.courseid = b.courseid AND b.moduleid = c.moduleid;
 ```
-NULL 값 조정 - IS (NOT) NULL
-***NVL: 치환***
+NULL 값 조정 - IS (NOT) NULL  
+**NVL: 치환**
 ```
 CREATE TABLE emp(empno varchar2(10), sal number(10));
 INSERT INTO emp VALUES('test1', 1000);
@@ -182,4 +182,5 @@ sqlldr userid=aiuser/1234 control=webcheck.ctl log=webcheck.log
 pandas, sklearn KMeans 알고리즘 활용 예제(matplotlib으로 visualization)
 KMeans: clustering algorithm
 코드 N드라이브에 있음
+
 #### AI보안3일(8)
