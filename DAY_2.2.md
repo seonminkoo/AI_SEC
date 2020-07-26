@@ -1,3 +1,6 @@
+
+![day2_2](https://user-images.githubusercontent.com/50771111/88466051-756ab380-cf03-11ea-972a-a8c19b88ad2f.jpg)
+
 #### 매크로
 윈도우만 WSAStartup 해줌!! -> 드라이버를 올림<br>
 매크로 코드에서 ** connect(s,sa, Len(sa)) //연결, 서버의 accept로 도착<br>
