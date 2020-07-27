@@ -106,5 +106,32 @@ https://howsecureismypassword.net/
 #### 하둡 실습
 
 
+#### mongoDB 실습
+bin 폴더 환경 변수 추가  
 
-   
+**cmd**
+```
+mongo
+show dbs
+use local
+show tables
+```
+ex. 몽고디비 collection 만들기
+```
+db.createCollection("WineList")
+
+db.WineList.insert({WineID:'W001',WineName:'Latour',VintageYear:'1959',VintageID:0001,WineType:({WineTypeID:'0001',WineTypeName:'WhiteWine'}),BottleType:375,Rating:'RP:96',Maturity:'Drink:Now',Price:2696,GST:2885,NewFlag:0})
+```
+결과  
+> WriteResult({ "nInserted" : 1 })
+
+#### 전체 검색
+```
+db.WineList.find()
+```
+> { "_id" : ObjectId("5f1e84f130bcb807c9d1fcda"), "WineID" : "W001", "WineName" : "Latour", "VintageYear" : "1959", "VintageID" : > > 1, "WineType" : { "WineTypeID" : "0001", "WineTypeName" : "WhiteWine" }, "BottleType" : 375, "Rating" : "RP:96", "Maturity" : > "Drink:Now", "Price" : 2696, "GST" : 2885, "NewFlag" : 0 }
+
+#### 특정 검색
+```
+db.WineList.find({WineName:'Latour'})
+```
