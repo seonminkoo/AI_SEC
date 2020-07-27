@@ -89,8 +89,19 @@ ex. 성적
 보고, 서비스 연계.
 
   
+-----
+디렉토리리스팅?!
+intitle index of
+intitle index of hdd
 
-  
+사이트URL/robots.txt
+---
+[메모]
+https://www.netcraft.com/
+https://www.gabia.com/
+https://howsecureismypassword.net/
+
+
 
 
    
