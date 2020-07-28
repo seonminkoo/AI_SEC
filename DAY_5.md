@@ -46,6 +46,8 @@ DNS : ~~~ 쿼리 => 마스터가 있고 대체할 수 있는 세컨더리 있음
       
       - 게이트를 통해 DNS 서버로 가야함!!!  
       - 서브넷 마스크나 게이트웨이 없으면 어떻게 되는지, MAC주소가 무슨 역할 하는지  
+      
+      arp 설명 짱 잘 되어 있음: https://medium.com/pocs/tcp-ip-%EC%9D%B4%EB%A1%A0-arp-%EC%BA%90%EC%8B%9C-%ED%85%8C%EC%9D%B4%EB%B8%94-1e07ab2ae28d
 
 네트워크는 계층적으로 통신함(OSI 7 Layer, TCP/IP 4 Layer)  
 ![layer](https://user-images.githubusercontent.com/50771111/88609141-5cf2c880-d0be-11ea-8611-cdb2d97571a1.png)
