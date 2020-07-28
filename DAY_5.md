@@ -11,9 +11,10 @@ DNS : ~~~ 쿼리 => 마스터가 있고 대체할 수 있는 세컨더리 있음
 데이터 노드:  
 
 ### 시험인감!!? [웹 브라우저에서 구글 사이트 접속 과정]
-####웹 브라우저에 google.com을 쳤을 때 페이지가 나오는 세부 흐름
-DNS 스콜
-TCP/IP step, Gate way
+웹 브라우저에 google.com을 쳤을 때 페이지가 나오는 세부 흐름  
+- keyword
+   - DNS 스콜  
+   - TCP/IP step, Gate way
 
 ``` 
 1. goolecom의 IP가 뭐지?  
