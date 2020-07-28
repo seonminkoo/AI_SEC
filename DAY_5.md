@@ -108,7 +108,7 @@ ping: icmp프로토콜, 네트워크 상태를 모니터링 하고 확인하기 
 ```
 ID와 PW를 입력하면
 id : ' OR '1' = '1--
-select count(*) from user_id whre id=’' OR '1' = '1’ -- and Pw=’hi’
+select count(*) from user_id where id=’' OR '1' = '1’ -- and Pw=’hi’
 ```
 - kali shell  
 > sqlmap -u "http://10.0.2.9/cat.php?id=1"  //sql injection에 취약한 URL 파라미터로 던져봄
@@ -130,3 +130,5 @@ hash 함수: 고정된 길이. 다른 입력값 -> 다른 출력값, 출력값�
    - 중국에서 해쉬값 풀어놓은 테이블 O -> 레인보우 테이블 
    
 **id/pw로 로그인 가능한거 확인함!!**
+
+
