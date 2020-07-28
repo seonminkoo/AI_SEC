@@ -68,7 +68,34 @@ TCP/IP step, Gate way
 4. HTTP Response(응답) 받고 화면에 데이터를 표시.  
 
 5. 연결을 해제.  
-```
 
+#### 준비
+> vm에 Web 깔기, kali linux 깔기
+
+#### cmd
+> ifconfig // ip 확인  
+
+ping: icmp프로토콜, 네트워크 상태를 모니터링 하고 확인하기 위해 사용하는 프로토콜
+> ping www.google.com
+> ping www.naver.com
+특정 서버가 살아있는지 알기 위해 ping 날렸는데 응답 있으면 살아 있는 것!  
+그러나 응답이 없다고해서 죽었다고 할 수는 X, 그냥 서버가 응답 안한거 일 수도 있어서!!
+> traceroute www.naver.com
+> 하려고 노력은 함!!
+
+> ping 쓰면 살았는지 죽었는지 알 수 있음!
+
+> fping : kali linux가 사용하는 명령어  
+> fping -g 10.0.2.0/24  
+> 몇 개 alive 한게 있음. 10.0.2.6는 나!  
+> 1은 게이트 웨이이고 2,3,3 중에 
+
+#### 포트 스캐닝
+> nmap -sT -v 10.0.2.2-4 (alive한 것들 어떤 포트 사용하고 있는지 확인)  
+
+> telnet 10.0.2.4 80(포트번호)  
+
+> kali -> application -> 파이어 폭스 -> 주소창에 10.0.2.4 입력  
+>   ==> My Awesome Photoblog 화면 출력!!  
 
 
