@@ -68,6 +68,7 @@ TCP/IP step, Gate way
 4. HTTP Response(응답) 받고 화면에 데이터를 표시.  
 
 5. 연결을 해제.  
+```
 
 #### 준비
 > vm에 Web 깔기, kali linux 깔기
