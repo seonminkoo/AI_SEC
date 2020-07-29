@@ -54,3 +54,6 @@ adb 쉘 모드
 tcpdump 파일 제공해주심  
 
 > adb push 파일명 저장할곳(/sdcard/Download)  
+
+
+
