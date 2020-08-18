@@ -8,7 +8,8 @@ Security: 공격자 있다고 가정
 - 원리: Target classifier를 속일 수 있도록 노이즈를 더함   
     - 변조율 최소(사람에 의한 탐지를 방지) & 최대 오인식을 하는 노이즈 (a) 찾기  
     
-
+#### 환경 설치
+https://www.dropbox.com/s/jfloz080tg8flny/aisecv.ova?dl=0  
 
 
 
