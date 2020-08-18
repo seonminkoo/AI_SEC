@@ -127,6 +127,17 @@ history //여태까지 한 명령어 나옴
 
 ```
 visualize 주석풀기
+```
+```
+def save
+
+for 부분
+png_name
+save_png
+imsave?
+그리고 실행
+```
+
 
 
 
