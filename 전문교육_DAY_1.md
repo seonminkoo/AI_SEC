@@ -112,4 +112,23 @@ playground.tensorflow.org
 데이터를 고객으로부터 수집하거나 생성된 데이터를 머신러닝에 사용하면 안됨    
 우리나라법은 누구인지 식별이 안되면 개인벙보보호법에 저촉되지 않음 -> 그러나 프라시버시 침해일 수도 있음  
 
+#### 실습
+```
+source adv_venc/bin/activate
+pip list
+cd adv
+ls
+cd 01_FGSN
+ls
+vi attack.py
+python attack.py
+history //여태까지 한 명령어 나옴
+```
+
+```
+visualize 주석풀기
+
+
+
+
 
