@@ -171,7 +171,6 @@ chmod 755 random
 ```
 
 #### sub 터미널
-```
 (python -c 'print"A"*64+"buff"';cat)|nc localhost 12350
 ```
 
@@ -219,6 +218,19 @@ pip3 install angr
 python
 import angr
 ```
+
+#### Angr 예시 - Defcamp r100 문제  
+```
+wget http://javahacking.com/aihacking/r100
+chmod 755 r100
+./r100
+```
+
+#### r100_solver.py 파일 생성
+```
+교재 233쪽
+```
+
 
 
 
