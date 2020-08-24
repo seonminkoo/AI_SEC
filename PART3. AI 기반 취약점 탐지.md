@@ -237,7 +237,28 @@ chmod 755 r100
 ```
 교재 233쪽
 ```
+---
+#### Radamda Fuzzer
+```
+퍼즈 테스팅 도구
+커맨드라인 기반으로 작동하며, 샘플 파일(입력 값)을 주입하면자동으로변이된 결과물을 생산
+사용자의 입력 값을 무작위로 생성해서 넣어줌 
+```
 
+#### 라담사 설치
+```
+sudo apt-get install acc make git wget
+git clone http://gitlab.com/akihe/radamsa.git
+cd radamsa
+make
+make install
+```
+
+```
+echo "aaa" | radamsa
+```
+해볼 때 마다 다른 출력값 나오는 거 볼 수 있음!!!!!!  
+             
 
 
 
