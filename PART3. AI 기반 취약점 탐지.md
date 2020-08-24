@@ -112,19 +112,20 @@ send_data(sock, buf, strlen(buf));
 - key, gs, buf 값 할당  
 - key라는 변수에 key값 들어가 있음  
 
-manage_client 
+manage_client   
 
-ebp  
+ebp    
 
-key  
-4byte   
-buf  
+key    
+4byte     
+buf    
 
-esp  
+esp    
 
-1. 5byte overflow./
-2. 문자열의 끝은 널 바이트(0x00) 구분
-3. 0x00까지 덮으면 문자열이 끝나지 않은 줄 알고 키 값까지 출력
+1. 5byte overflow./    
+2. 문자열의 끝은 널 바이트(0x00) 구분    
+3. 0x00까지 덮으면 문자열이 끝나지 않은 줄 알고 키 값까지 출력   
+
 ```   
 apt-get install pyyhon
 (python -c `print"A"*123;cat)|nc localhost 12344
@@ -178,7 +179,8 @@ chmod 755 random
 ```
 
 #### sub 터미널
-(python -c 'print"A"*64+"buff"';cat)|nc localhost 12350
+```
+(python -c 'print"A"*64+"buff"';cat)|nc localhost 12350  
 ```
 
 -------------
