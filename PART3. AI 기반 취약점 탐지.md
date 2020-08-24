@@ -207,6 +207,18 @@ source /usr/local/bin/virualenvwrapper.sh
 (/user/share/virtualenvwrapper/virtualwrapper.sh)
 ```
 
+```
+mkvirtualenv angr
+workon angr     //이거 했을 때 에러 안 떠야 정상!!  
+pip3 install angr
+```
+
+#### .environments 폴더 내 angr 파일 설치된 것 확인
+- .environments 폴더로 가서 
+```
+python
+import angr
+```
 
 
 
