@@ -23,6 +23,13 @@ symbolic Execution등 분석 : ANGR
 
 #### Angr : shellphish 팀에서 개발한 symbolic Excution  
 #### Radamsa Fuzzer : 취약한 함수의 입력값을 찾거나 크래쉬 부분  
+
+#### AI 기반 취약점 탐지 대회  
+CWE 취약점 공통항목 중 시스템 해킹에 이용될 수 있는 항목들 위주로 취약한 바이너리 문제가 제공됨  
+#### Angr : shellphish 팀에서 개발한 symbolic Excution  
+#### Radamsa Fuzzer : 취약한 함수의 입력값을 찾거나 크래쉬 부분  
+
+
 -----
 ### 실습
 #### 초기 비밀번호 설정
